@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.table-users {
+	width: 90%;
+	height: 100vh;
+	margin: 70px auto;
+	padding: 0;
+}
+
+.table-users__header {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #0000002b;
+	padding-bottom: 10px;
+}
+
+.table-users__title {
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.table-users__table {
+	
+}

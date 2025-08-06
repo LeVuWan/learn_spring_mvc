@@ -1,5 +1,7 @@
 package com.windy.learnSpringMVC.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,19 +24,28 @@ public class UserController {
 	public String getHompage(Model model) {
 		String msg = this.userService.handleHello();
 		model.addAttribute("msg", msg);
+		List<User> users = userService.findAllUsersService();
+		System.out.println("List user: " + users);
 		return "hello";
 	}
 
-	@RequestMapping("/admin/user")
+	@RequestMapping(value = "/admin/user", method = RequestMethod.GET)
 	public String getUserPage(Model model) {
+		List<User> users = userService.findAllUsersService();
+		model.addAttribute("users", users);
+		return "admin/user/getAllUser";
+	}
+
+	@RequestMapping(value = "/admin/user/create", method = RequestMethod.GET)
+	public String createUserPage(Model model) {
 		model.addAttribute("newAUser", new User());
 		return "admin/user/create";
 	}
 
 	@RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
 	public String createUserPage(Model model, @ModelAttribute("newAUser") User user) {
-		User newUser = userService.createNewUser(user);
-		return "hello";
+		User newUser = userService.createNewUserService(user);
+		return "redirect:/admin/user";
 	}
 
 }
